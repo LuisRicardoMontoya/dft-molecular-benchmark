@@ -1,0 +1,14 @@
+{
+  "molecule": "H2",
+  "homo_eV": -10.335276934505115,
+  "lumo_eV": 0.22724125467528486,
+  "gap_eV": 10.5625181891804,
+  "n_occupied": 1,
+  "n_unoccupied": 1,
+  "occupied_energies": [
+    -10.335276934505115
+  ],
+  "unoccupied_energies": [
+    0.22724125467528486
+  ]
+}
