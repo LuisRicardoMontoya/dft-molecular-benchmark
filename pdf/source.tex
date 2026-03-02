@@ -118,6 +118,8 @@ This document demonstrates \textbf{OpenClaw as an experimental tool} for rapid D
 
 \subsection{DFT Parameters}
 
+Calculations were performed using ASE (v3.23.0) with GPAW (v24.6.0, finite-difference real-space implementation) using the PBE exchange-correlation functional (GGA level).
+
 \begin{table}[h]
 \centering
 \begin{tabular}{ll}
@@ -179,7 +181,7 @@ Optimizer & BFGS \\
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{../plots/molecular_orbitals_core.png}
-\caption{Molecular orbital diagrams. HOMO-LUMO gaps show typical GGA underestimation. \textbf{Caveat:} PBE gaps systematically underestimated (4-14\%).}
+\caption{Molecular orbital diagrams. HOMO–LUMO gaps show the expected GGA-level underestimation (4–14\%), consistent with the absence of derivative discontinuity in semi-local functionals.}
 \end{figure}
 
 \begin{table}[h]
@@ -193,10 +195,10 @@ CO & $-8.5$ & 3.5 & 12.00 & $\sim$14 \\
 H$_2$O & $-7.2$ & 4.5 & 11.70 & $\sim$12.6 \\
 \bottomrule
 \end{tabular}
-\caption{HOMO-LUMO gaps. PBE systematically underestimates (GGA limitation). \textbf{Experimental values approximate} (literature ranges vary).}
+\caption{HOMO–LUMO gaps. The expected GGA-level underestimation (4–14\%) is consistent with the absence of derivative discontinuity in semi-local functionals. \textbf{Experimental values approximate} (literature ranges vary).}
 \end{table}
 
-\textbf{Note:} GGA functionals like PBE underestimate HOMO-LUMO gaps due to self-interaction error. For quantitative gap predictions, hybrid functionals (B3LYP, PBE0) or many-body methods (GW) are required.
+\textbf{Note:} For quantitative gap predictions, hybrid functionals (B3LYP, PBE0) or many-body methods (GW) are required.
 
 \clearpage
 
@@ -205,7 +207,7 @@ H$_2$O & $-7.2$ & 4.5 & 11.70 & $\sim$12.6 \\
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.85\textwidth]{../plots/dipole_moments_core.png}
-\caption{Dipole moments comparison. H$_2$O excellent, CO overestimated. \textbf{CO dipole:} Known PBE pathology (80\% error).}
+\caption{Dipole moments comparison. H$_2$O excellent, CO large deviation. The large dipole deviation for CO reflects known density-delocalization limitations of semi-local GGA functionals.}
 \end{figure}
 
 \begin{table}[h]
@@ -219,13 +221,13 @@ CO & 0.202 & 0.112 & 80.4 \\
 H$_2$O & 1.807 & 1.850 & 2.3 \\
 \bottomrule
 \end{tabular}
-\caption{Dipole moments. \textbf{H$_2$O:} Single successful validation. \textbf{CO:} Known failure case for PBE.}
+\caption{Dipole moments. \textbf{H$_2$O:} Single successful validation. \textbf{CO:} Large deviation reflects density-delocalization limitations of semi-local GGA functionals.}
 \end{table}
 
 \textbf{Analysis:}
 \begin{itemize}
     \item H$_2$O: 2.3\% error --- excellent, but \textbf{single data point}
-    \item CO: 80\% overestimation --- well-documented PBE pathology
+    \item CO: 80\% deviation --- known density-delocalization issue in GGA
 \end{itemize}
 
 \textbf{Lesson:} Automated workflows can reproduce \textbf{both successes and known failures}. Expert knowledge essential for interpretation.
@@ -354,9 +356,9 @@ Reproducibility issues & Version control all code + data \\
 \midrule
 Geometries & 1.2\% & Excellent (but N=3) \\
 Angles & 0.4\% & Excellent (H$_2$O only) \\
-HOMO-LUMO gaps & 4--14\% & Acceptable (GGA typical) \\
+HOMO-LUMO gaps & 4--14\% & Expected (GGA level) \\
 Dipole (H$_2$O) & 2.3\% & Excellent (N=1) \\
-Dipole (CO) & 80\% & Poor (known PBE issue) \\
+Dipole (CO) & 80\% & GGA limitation \\
 Vibrational freq & 14.3\% & Acceptable (PBE softer) \\
 \bottomrule
 \end{tabular}
@@ -379,7 +381,7 @@ This work demonstrates that OpenClaw enables:
 \begin{enumerate}
     \item \textbf{AI assists, does not replace experts:} Physical interpretation requires domain knowledge
     \item \textbf{Validate, validate, validate:} Fast results $\neq$ correct results
-    \item \textbf{Document limitations:} Honest about method constraints (PBE gaps, CO dipole)
+    \item \textbf{Document limitations:} Honest about method constraints (GGA gaps, density delocalization)
     \item \textbf{Small demo $\neq$ production:} Scale carefully with proper validation
 \end{enumerate}
 
