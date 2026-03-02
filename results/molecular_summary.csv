@@ -1,4 +1,6 @@
-molecule,E_opt_eV,n_atoms,bond_lengths_A
-H2,-6.750259,2,0.751
-CO,-15.225201,2,1.137
-H2O,-14.565393,3,"0.971,0.971"
+molecule,bond_type,bond_calc_A,bond_exp_A,bond_error_pct
+H2,H-H,0.751,0.741,1.35
+CO,C-O,1.137,1.128,0.8
+H2O,O-H,0.971,0.957,1.46
+NH3,N-H,1.0218,1.012,0.97
+CH4,C-H,1.09599153193954,1.087,0.8271878509236379

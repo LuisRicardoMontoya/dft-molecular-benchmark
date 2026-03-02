@@ -1,0 +1,37 @@
+================================================================================
+WHY NH3 AND CH4 AS LEVEL 2 TEST MOLECULES?
+================================================================================
+
+LEVEL 1 (H2, CO, H2O):
+- Simple diatomic + triatomic
+- Linear or bent geometries
+- Bond lengths only (H2O adds angle)
+
+LEVEL 2 (NH3, CH4):
+- Increased complexity (4-5 atoms)
+- Non-planar geometries (pyramidal, tetrahedral)
+- Multiple equivalent bonds
+- Tests symmetry handling
+
+NH3 (Ammonia):
+✓ Pyramidal (C3v symmetry)
+✓ 3 equivalent N-H bonds
+✓ Non-zero dipole (test polar pyramidal)
+✓ H-N-H angles (test angle optimization)
+✓ Bridge between triatomic and tetrahedral
+
+CH4 (Methane):
+✓ Tetrahedral (Td symmetry)
+✓ 4 equivalent C-H bonds
+✓ Zero dipole (test symmetry recognition)
+✓ Most symmetric non-linear molecule
+✓ Foundation for organic chemistry
+
+TOGETHER:
+- Test handling of higher symmetry
+- Validate equivalent bond averaging
+- Check dipole for polar (NH3) vs non-polar (CH4)
+- Progressively more complex than Level 1
+- Natural stepping stone to larger molecules
+
+GOOD NEXT-STEP TEST BEYOND H2/CO/H2O ✓
