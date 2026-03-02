@@ -2,29 +2,38 @@
 
 **Reproducible Density Functional Theory Pipeline using ASE + GPAW**
 
+[![PDF Report](https://img.shields.io/badge/PDF-Report-blue)](pdf/DFT_Molecular_Benchmark_Report.pdf)
+
 ---
 
 ## 📊 Overview
 
-This project demonstrates a fully automated DFT workflow for molecular geometry optimization with rigorous electronic analysis:
+This project demonstrates a standardized DFT workflow for molecular systems:
 
-- ✅ **Reproducible calculations** (H₂, CO, H₂O with PBE functional)
-- ✅ **Automated analysis** (bond lengths, convergence, orbital diagrams)
-- ✅ **Molecular electronic analysis** (HOMO-LUMO gaps, binding energies, potential curves)
-- ✅ **LaTeX report generation** (publication-quality PDF)
-- ✅ **OpenClaw workflow demonstration** (human-AI collaboration)
+- ✅ **Core analysis** (H₂, CO, H₂O): geometry, orbitals, dipole, charges
+- ✅ **Deep dive** (H₂ only): potential curve, vibrational frequency
+- ✅ **Automated pipeline** with BFGS optimization
+- ✅ **Publication-quality figures** (300 DPI)
+- ✅ **OpenClaw workflow** (human-AI collaboration)
 
 ---
 
 ## 🎯 Results Summary
 
-| Molecule | DFT Bond (Å) | Exp Bond (Å) | Error | Status |
-|----------|--------------|--------------|-------|--------|
-| H₂       | 0.751        | 0.741        | 1.35% | ✅     |
-| CO       | 1.137        | 1.128        | 0.80% | ✅     |
-| H₂O      | 0.971        | 0.957        | 1.46% | ✅     |
+### Core Analysis (All Molecules)
 
-**Average Error:** 1.20% (Excellent!)
+| Molecule | Bond (Å) | Exp (Å) | Error | HOMO-LUMO Gap (eV) | Dipole (D) |
+|----------|----------|---------|-------|-------------------|-----------|
+| H₂       | 0.751    | 0.741   | 1.35% | 10.56 (exp ~11)   | 0.000     |
+| CO       | 1.137    | 1.128   | 0.80% | 12.00 (exp ~14)   | 0.202     |
+| H₂O      | 0.971    | 0.957   | 1.46% | 11.70 (exp ~12.6) | 1.807     |
+
+**Average Geometry Error:** 1.20% ✅
+
+### H₂ Deep Dive
+
+- **Potential curve:** R_eq = 0.755 Å (exp: 0.741 Å, error 1.94%)
+- **Vibrational frequency:** 3770 cm⁻¹ (exp: 4401 cm⁻¹, error 14.3%)
 
 All results validated against NIST Chemistry WebBook.
 
@@ -32,17 +41,41 @@ All results validated against NIST Chemistry WebBook.
 
 ## 📄 Main Output
 
-**PDF Report:** `pdf/DFT_Molecular_Benchmark_Report.pdf` (985 KB)
+**📕 [PDF Report](pdf/DFT_Molecular_Benchmark_Report.pdf)** (1.4 MB, ~12-14 pages)
 
 **Contents:**
-- Complete methodology (DFT parameters)
-- Optimized geometries with error analysis
-- **Molecular orbital analysis** (HOMO-LUMO diagrams)
-- **Binding energy calculations** (H₂ dissociation)
-- **Potential energy curves** (E(R) with equilibrium bond lengths)
-- Convergence analysis
-- OpenClaw workflow demonstration
-- Discussion of DFT-PBE limitations
+- **Section 3:** Core Analysis (geometry, orbitals, dipole, charges)
+- **Section 4:** H₂ Deep Dive (potential curve, vibrational frequency)
+- **Section 5:** Discussion (limitations, best practices)
+
+**Structure:**
+- Core properties for all molecules (standardized)
+- Deep dive only for H₂ (1D potential is meaningful)
+- No 1D curves for polyatomics (H₂O has 3N-6 modes, not representative)
+
+---
+
+## 📁 Project Structure
+
+```
+project_dft_tests/
+├── modules/              # Calculation modules
+├── runs/                 # DFT outputs (H2, CO, H2O)
+│   └── */bfgs_history.csv   # Optimization traces
+├── results/              # Processed data (JSON, CSV)
+│   ├── core_analysis.json
+│   └── h2_vibrational.json
+├── plots/                # Figures (300 DPI)
+│   ├── geometry_summary_core.png
+│   ├── molecular_orbitals_core.png
+│   ├── dipole_moments_core.png
+│   ├── convergence_analysis_pub.png
+│   ├── h2_potential_curve.png
+│   └── h2_vibrational_deep.png
+├── pdf/                  # Final report
+│   └── DFT_Molecular_Benchmark_Report.pdf
+└── README.md
+```
 
 ---
 
@@ -62,12 +95,12 @@ pip install ase gpaw matplotlib numpy scipy pandas
 python3 run_all.py
 ```
 
-**Expected runtime:** ~1 hour (includes geometry optimization and electronic analysis)
+**Expected runtime:** ~2 hours (geometry optimization + analysis)
 
 ### 3. View Results
 
 ```bash
-cat results/molecular_summary.csv
+cat results/core_analysis.json
 open pdf/DFT_Molecular_Benchmark_Report.pdf
 ```
 
@@ -90,40 +123,58 @@ open pdf/DFT_Molecular_Benchmark_Report.pdf
 
 ---
 
-## 📈 Key Results
+## 📈 Analysis Structure
 
-### Geometric Properties
+### Core Analysis (H₂, CO, H₂O)
 
-All bond lengths within 2% of experimental values:
-- ✅ **H₂:** 1.35% error
-- ✅ **CO:** 0.80% error  
-- ✅ **H₂O:** 1.46% error
+**1. Optimized Geometries**
+- Bond lengths within 1.5% of experimental
+- Angles within 0.5% of experimental
 
-### Electronic Properties
+**2. Electronic Properties**
+- HOMO-LUMO gaps (4-14% underestimation, typical GGA)
+- Molecular orbital diagrams
 
-**H₂ Analysis:**
-- **HOMO-LUMO gap:** 10.56 eV (exp ~11 eV, error ~4%)
-- **Binding energy:** 6.77 eV (exp 4.52 eV, PBE overestimation)
-- **R_eq from E(R) curve:** 0.755 Å (exp 0.741 Å, error 1.94%)
+**3. Dipole Moments**
+- H₂O: 2.3% error (excellent!)
+- CO: 80% error (known PBE pathology)
+
+**4. Atomic Charges**
+- Qualitative distribution (Mulliken-like)
+
+### Deep Dive (H₂ Only)
+
+**5. Potential Energy Curve**
+- 11-point scan (R = 0.5-1.5 Å)
+- Quadratic fit near minimum
+- R_eq extraction
+
+**6. Vibrational Frequency**
+- Harmonic approximation
+- Force constant calculation
+- Comparison with experimental
+
+**Rationale:** 1D potential curves only meaningful for diatomic molecules. Polyatomics like H₂O have 3N-6 modes; focus on geometry and dipole instead.
 
 ---
 
-## 🔬 Molecular Electronic Analysis
+## 🔬 Key Findings
 
-### Why Not Density of States (DOS)?
+### What PBE Does Well ✅
+- **Geometries:** 1.2% average error (excellent)
+- **H₂O dipole:** 2.3% error (excellent)
+- **H₂ equilibrium distance:** 1.94% error (excellent)
 
-For small discrete molecules, **molecular orbital diagrams** are more appropriate than DOS:
+### Known Limitations ⚠️
+- **HOMO-LUMO gaps:** 4-14% underestimation (GGA self-interaction error)
+- **CO dipole:** 80% overestimation (known PBE pathology)
+- **Vibrational frequencies:** 14% underestimation (PBE softer potential)
 
-- ✅ Discrete energy levels (not continuous bands)
-- ✅ No artificial Gaussian smoothing
-- ✅ Direct HOMO/LUMO identification
-- ✅ Standard in molecular chemistry
-
-**Analysis performed:**
-1. Molecular orbital diagrams with HOMO/LUMO
-2. Binding energy: E_bind = 2×E(H atom) - E(H₂)
-3. Potential energy curves: E(R) with quadratic fit
-4. Direct eigenvalue analysis (no Fermi level ambiguity)
+### Best Practices
+- Use PBE for **geometry optimization** (reliable)
+- Use hybrid functionals for **electronic gaps** (B3LYP, PBE0)
+- Interpret **atomic charges** qualitatively only
+- Focus on **geometry + dipole** for polyatomics (not 1D scans)
 
 ---
 
@@ -133,11 +184,11 @@ Human-AI collaboration for scientific computing:
 
 | Aspect | Human (Rick) | AI (Faraday) |
 |--------|--------------|--------------|
-| Strategy | Define objectives | Implement pipeline |
-| Execution | Monitor progress | Run calculations |
-| Analysis | Interpret physics | Generate rigorous analysis |
+| Strategy | Define protocol | Implement pipeline |
+| Validation | Physics interpretation | Execute calculations |
+| Documentation | Review quality | Generate reports |
 
-**Timeline:** ~1 hour from concept to results
+**Timeline:** ~2 hours from concept to publication-ready results
 
 ---
 
@@ -145,12 +196,17 @@ Human-AI collaboration for scientific computing:
 
 ```bibtex
 @software{dft_molecular_benchmark_2026,
-  title={DFT Molecular Benchmark: Reproducible ASE+GPAW Pipeline},
+  title={DFT Molecular Benchmark: Standardized Core Analysis + Deep Dive},
   author={Rick and Faraday},
   year={2026},
   url={https://github.com/LuisRicardoMontoya/dft-molecular-benchmark}
 }
 ```
+
+**Software:**
+- ASE: https://wiki.fysik.dtu.dk/ase/
+- GPAW: https://wiki.fysik.dtu.dk/gpaw/
+- OpenClaw: https://docs.openclaw.ai/
 
 ---
 
