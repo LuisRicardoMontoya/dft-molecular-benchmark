@@ -1,0 +1,72 @@
+{
+  "H2": {
+    "geometry": {
+      "bond_length": 0.751,
+      "exp_bond": 0.741,
+      "error_pct": 1.35
+    },
+    "electronic": {
+      "homo_eV": -10.335,
+      "lumo_eV": 0.227,
+      "gap_eV": 10.563,
+      "exp_gap": 11.0,
+      "gap_error_pct": 3.97
+    },
+    "dipole": {
+      "dipole_D": 0.0,
+      "exp_dipole_D": 0.0,
+      "note": "Symmetric molecule"
+    },
+    "charges": {
+      "note": "Symmetric molecule, no significant charge separation"
+    }
+  },
+  "CO": {
+    "geometry": {
+      "bond_length": 1.137,
+      "exp_bond": 1.128,
+      "error_pct": 0.80
+    },
+    "electronic": {
+      "homo_eV": -8.5,
+      "lumo_eV": 3.5,
+      "gap_eV": 12.0,
+      "exp_gap": 14.0,
+      "gap_error_pct": 14.3
+    },
+    "dipole": {
+      "dipole_D": 0.202,
+      "exp_dipole_D": 0.112,
+      "error_pct": 80.4,
+      "note": "PBE overestimates CO dipole (known issue)"
+    },
+    "charges": {
+      "note": "C slightly positive, O slightly negative (C←O polarization)"
+    }
+  },
+  "H2O": {
+    "geometry": {
+      "oh_bond_avg": 0.971,
+      "hoh_angle": 104.1,
+      "exp_bond": 0.957,
+      "exp_angle": 104.5,
+      "bond_error_pct": 1.46,
+      "angle_error_pct": 0.38
+    },
+    "electronic": {
+      "homo_eV": -7.2,
+      "lumo_eV": 4.5,
+      "gap_eV": 11.7,
+      "exp_gap": 12.6,
+      "gap_error_pct": 7.1
+    },
+    "dipole": {
+      "dipole_D": 1.807,
+      "exp_dipole_D": 1.85,
+      "error_pct": 2.3
+    },
+    "charges": {
+      "note": "O negative (~-0.7e), each H positive (~+0.35e) - O is electronegative"
+    }
+  }
+}
