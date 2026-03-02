@@ -2,6 +2,8 @@
 
 **Reproducible Density Functional Theory Pipeline using ASE + GPAW**
 
+![DFT Molecular Benchmark](cover.jpg)
+
 [![PDF Report](https://img.shields.io/badge/PDF-Report-blue)](pdf/DFT_Molecular_Benchmark_Report.pdf)
 
 ---
