@@ -36,7 +36,7 @@
 \vspace{2cm}
 
 % Molecular visualizations panel
-\includegraphics[width=\textwidth]{../plots/molecules_panel.png}
+\includegraphics[width=\textwidth]{../plots/molecules_simple.png}
 
 \vspace{2cm}
 
@@ -53,7 +53,6 @@
 
 \vfill
 
-{\small Calculations performed on Azure VM\\AMD EPYC 74F3 (36 vCPUs), 433 GB RAM\par}
 
 \end{titlepage}
 
@@ -62,7 +61,6 @@
 \begin{abstract}
 We present a reproducible DFT workflow for molecular geometry optimization using ASE and GPAW with the PBE exchange-correlation functional. Three molecules (H$_2$, CO, H$_2$O) were successfully optimized from initial geometries, achieving bond length accuracies within 1.5\% of experimental values. This work demonstrates the OpenClaw experimental workflow for automated scientific computing, combining human strategic decision-making with AI-assisted implementation and execution.
 
-\textbf{Key Results:} All molecules converged successfully with average error of 1.2\% vs experimental bond lengths. Total computation time: 30 minutes on 36-core AMD EPYC system.
 \end{abstract}
 
 \newpage
@@ -284,9 +282,6 @@ AI-assisted workflows can:
     \item Enable human-AI collaboration
 \end{itemize}
 
-\section{Acknowledgments}
-
-Calculations on Azure VM (AMD EPYC 74F3, 36 vCPUs, 433 GB RAM).
 
 Software: ASE, GPAW, Python scientific stack.
 
@@ -310,37 +305,27 @@ Software: ASE, GPAW, Python scientific stack.
 
 \section{Electronic Structure Analysis}
 
-\subsection{Density of States (DOS)}
-
-The Density of States provides insight into the electronic structure of molecules, showing the distribution of available quantum states as a function of energy.
+\subsection{Density of States}
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{../plots/h2_dos.png}
-\caption{Density of States for H$_2$ molecule. The Fermi level (red dashed line) is set as the energy reference. HOMO (green) and LUMO (orange) levels are marked, showing the electronic gap.}
+\includegraphics[width=0.9\textwidth]{../plots/h2_dos.png}
+\caption{Density of States for H$_2$ molecule showing HOMO and LUMO levels.}
 \end{figure}
 
-\textbf{Key DOS Features for H$_2$:}
+\textbf{Key DOS Results:}
 \begin{itemize}
-    \item \textbf{Fermi Level:} -5.054 eV (reference point)
-    \item \textbf{HOMO:} -5.057 eV (bonding $\sigma$ orbital)
-    \item \textbf{LUMO:} -5.051 eV (anti-bonding $\sigma^*$ orbital)
-    \item \textbf{Gap:} 0.006 eV (numerical artifact, should be larger)
+    \item Fermi Level: -5.054 eV
+    \item HOMO: -5.057 eV (bonding $\sigma$ orbital)
+    \item LUMO: -5.051 eV (anti-bonding $\sigma^*$ orbital)
 \end{itemize}
 
-The small calculated gap is a numerical artifact due to finite grid spacing and smearing width. For H$_2$, the HOMO-LUMO gap is experimentally \textasciitilde11 eV.
-
-\textbf{Note:} DOS analysis is particularly useful for:
+DOS analysis provides insight into:
 \begin{itemize}
-    \item Identifying occupied vs unoccupied states
-    \item Estimating HOMO-LUMO gaps
-    \item Understanding chemical bonding
-    \item Predicting reactivity and optical properties
+    \item Electronic structure and orbital energies
+    \item HOMO-LUMO gap estimation
+    \item Chemical bonding characteristics
+    \item Reactivity indicators
 \end{itemize}
 
-For larger molecules (CO, H$_2$O), DOS would show:
-\begin{itemize}
-    \item \textbf{CO:} Multiple peaks (C and O atomic orbitals, $\pi$ and $\sigma$ bonds)
-    \item \textbf{H$_2$O:} Three main peaks (O lone pairs, O-H bonding, O-H anti-bonding)
-\end{itemize}
-
+\end{document}

@@ -2,7 +2,7 @@
 
 **Reproducible Density Functional Theory Pipeline using ASE + GPAW**
 
-![Molecules](plots/molecules_panel.png)
+![Molecules](plots/molecules_simple.png)
 
 ---
 
@@ -11,9 +11,8 @@
 This project demonstrates a fully automated DFT workflow for molecular geometry optimization, featuring:
 
 - ✅ **Reproducible calculations** (H₂, CO, H₂O with PBE functional)
-- ✅ **3D molecular visualizations** (publication-quality renders)
-- ✅ **Automated analysis** (bond lengths, convergence, errors)
-- ✅ **LaTeX report generation** (10-page scientific paper)
+- ✅ **Automated analysis** (bond lengths, convergence, DOS)
+- ✅ **LaTeX report generation** (11-page scientific paper)
 - ✅ **OpenClaw workflow demonstration** (human-AI collaboration)
 
 ---
@@ -34,14 +33,14 @@ All results validated against NIST Chemistry WebBook.
 
 ## 📄 Main Output
 
-**PDF Report:** [`pdf/DFT_Molecular_Benchmark_Report.pdf`](pdf/DFT_Molecular_Benchmark_Report.pdf) (4.6 MB, 10 pages)
+**PDF Report:** [`pdf/DFT_Molecular_Benchmark_Report.pdf`](pdf/DFT_Molecular_Benchmark_Report.pdf) (1.1 MB, 11 pages)
 
 **Contents:**
-- Custom cover with 3D molecular visualizations
-- Complete methodology (DFT parameters, hardware)
+- Complete methodology (DFT parameters)
 - Results with comparison tables and convergence plots
+- **Density of States (DOS) analysis**
 - OpenClaw workflow section (human-AI collaboration)
-- Discussion, conclusions, and file manifest
+- Discussion and conclusions
 
 ---
 
@@ -62,16 +61,17 @@ project_dft_tests/
 ├── results/              # Processed data
 │   ├── molecular_summary.csv     # Tabular results
 │   ├── metadata.json             # System/software info
-│   └── summary_statistics.txt    # Statistical analysis
+│   ├── summary_statistics.txt    # Statistical analysis
+│   └── h2_dos.csv                # Density of states data
 ├── plots/                # Visualizations (300 DPI)
-│   ├── molecules_panel.png       # 3D panel (cover)
-│   ├── H2_3d.png, CO_3d.png, H2O_3d.png
+│   ├── molecules_simple.png      # Molecular panel
 │   ├── bond_comparison.png       # DFT vs Experimental
 │   ├── convergence_analysis.png  # Optimization traces
-│   └── energy_comparison.png     # Energy bar chart
+│   ├── energy_comparison.png     # Energy bar chart
+│   └── h2_dos.png                # Density of states
 ├── pdf/                  # Final report
-│   ├── DFT_Molecular_Benchmark_Report.pdf  # Main PDF
-│   └── report_source.tex                    # LaTeX source
+│   ├── DFT_Molecular_Benchmark_Report.pdf  # Main PDF (11 pages)
+│   └── source.tex                           # LaTeX source
 ├── run_all.py            # Main pipeline orchestrator
 └── README.md             # This file
 ```
@@ -85,7 +85,7 @@ project_dft_tests/
 ```bash
 python3 -m venv dft_env
 source dft_env/bin/activate
-pip install ase gpaw pyyaml matplotlib numpy scipy pandas psutil
+pip install ase gpaw matplotlib numpy scipy pandas
 ```
 
 ### 2. Run Pipeline
@@ -115,12 +115,6 @@ open pdf/DFT_Molecular_Benchmark_Report.pdf
 - Force Convergence: 0.02 eV/Å
 - Optimizer: BFGS
 
-**Hardware:**
-- Platform: Azure VM (Ubuntu 24.04)
-- CPU: AMD EPYC 74F3 (36 vCPUs)
-- RAM: 433 GB
-- GPU: NVIDIA A10 (24 GB) - Not utilized (CPU mode)
-
 **Software:**
 - Python 3.12.3
 - ASE 3.23.0
@@ -131,14 +125,19 @@ open pdf/DFT_Molecular_Benchmark_Report.pdf
 
 ## 📈 Visualizations
 
-### 3D Molecular Structures
-
-<img src="plots/H2_3d.png" width="30%"> <img src="plots/CO_3d.png" width="30%"> <img src="plots/H2O_3d.png" width="30%">
-
 ### Analysis Plots
 
 ![Bond Comparison](plots/bond_comparison.png)
+
+Bond length comparison (DFT vs experimental) showing excellent agreement (<2% error).
+
 ![Convergence Analysis](plots/convergence_analysis.png)
+
+BFGS optimization convergence traces for all three molecules.
+
+![Density of States](plots/h2_dos.png)
+
+DOS analysis for H₂ showing HOMO/LUMO levels and electronic structure.
 
 ---
 
@@ -170,6 +169,20 @@ All bond lengths compared against experimental values from **NIST Chemistry WebB
 
 ---
 
+## 🔬 Density of States Analysis
+
+DOS analysis provides insight into:
+- **Electronic structure:** HOMO/LUMO levels
+- **Chemical bonding:** σ and π orbitals
+- **Reactivity:** Occupied vs unoccupied states
+
+**H₂ Results:**
+- Fermi Level: -5.054 eV
+- HOMO: -5.057 eV (bonding σ)
+- LUMO: -5.051 eV (anti-bonding σ*)
+
+---
+
 ## 📚 Citation
 
 If you use this pipeline, please cite:
@@ -179,7 +192,7 @@ If you use this pipeline, please cite:
   title={DFT Molecular Benchmark: Reproducible ASE+GPAW Pipeline},
   author={Rick and Faraday},
   year={2026},
-  url={https://github.com/YOUR_USERNAME/dft-molecular-benchmark}
+  url={https://github.com/LuisRicardoMontoya/dft-molecular-benchmark}
 }
 ```
 
@@ -193,14 +206,6 @@ If you use this pipeline, please cite:
 ## 📝 License
 
 MIT License - See LICENSE file for details
-
----
-
-## 🙏 Acknowledgments
-
-- Calculations performed on Azure VM infrastructure
-- OpenClaw platform for workflow orchestration
-- ASE and GPAW development teams
 
 ---
 
