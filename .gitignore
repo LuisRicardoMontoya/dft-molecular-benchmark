@@ -1,0 +1,44 @@
+# DFT calculation outputs
+runs/*/scf.txt
+runs/*/opt.log
+runs/*/*.traj
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# LaTeX auxiliary files
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Execution logs
+execution.log
+
+# Keep final outputs
+!pdf/*.pdf
+!plots/*.png
+!results/*.csv
+!results/*.json
+!results/*.txt

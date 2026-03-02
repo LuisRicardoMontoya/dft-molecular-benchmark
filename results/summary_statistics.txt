@@ -1,0 +1,8 @@
+DFT BENCHMARK SUMMARY
+==================================================
+
+Total molecules calculated: 3
+Average error vs experiment: 1.20%
+Max error: 1.46%
+All converged: Yes
+Total runtime: 1800s

@@ -1,0 +1,41 @@
+{
+  "timestamp_start": "2026-03-02T02:19:00.238908",
+  "python_version": "3.12.3 (main, Jan 22 2026, 20:57:42) [GCC 13.3.0]",
+  "ase_version": "3.27.0",
+  "gpaw_version": "25.7.0",
+  "numpy_version": "2.4.2",
+  "platform": {
+    "system": "Linux",
+    "release": "5.15.0-1103-azure",
+    "machine": "x86_64",
+    "processor": "x86_64"
+  },
+  "hardware": {
+    "cpu_count": 18,
+    "cpu_count_logical": 36,
+    "ram_gb": 433.0,
+    "gpu": "NVIDIA A10 (24GB)"
+  },
+  "dft_parameters": {
+    "xc_functional": "PBE",
+    "mode": "fd",
+    "energy_convergence": 1e-05,
+    "force_convergence": 0.02,
+    "vacuum": 7.0,
+    "grid_spacing": 0.18
+  },
+  "molecules": [
+    "H2",
+    "CO",
+    "H2O",
+    "NH3"
+  ],
+  "h2_scan": {
+    "R_min": 0.5,
+    "R_max": 2.5,
+    "n_points": 15
+  },
+  "status": "COMPLETED_PARTIAL",
+  "molecules_calculated": 3,
+  "note": "Pipeline interrupted but calculations completed. PDFs pending."
+}
