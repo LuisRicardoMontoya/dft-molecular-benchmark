@@ -2,17 +2,16 @@
 
 **Reproducible Density Functional Theory Pipeline using ASE + GPAW**
 
-![Molecules](plots/molecules_simple.png)
-
 ---
 
 ## 📊 Overview
 
-This project demonstrates a fully automated DFT workflow for molecular geometry optimization, featuring:
+This project demonstrates a fully automated DFT workflow for molecular geometry optimization with rigorous electronic analysis:
 
 - ✅ **Reproducible calculations** (H₂, CO, H₂O with PBE functional)
-- ✅ **Automated analysis** (bond lengths, convergence, DOS)
-- ✅ **LaTeX report generation** (11-page scientific paper)
+- ✅ **Automated analysis** (bond lengths, convergence, orbital diagrams)
+- ✅ **Molecular electronic analysis** (HOMO-LUMO gaps, binding energies, potential curves)
+- ✅ **LaTeX report generation** (publication-quality PDF)
 - ✅ **OpenClaw workflow demonstration** (human-AI collaboration)
 
 ---
@@ -33,48 +32,17 @@ All results validated against NIST Chemistry WebBook.
 
 ## 📄 Main Output
 
-**PDF Report:** [`pdf/DFT_Molecular_Benchmark_Report.pdf`](pdf/DFT_Molecular_Benchmark_Report.pdf) (1.1 MB, 11 pages)
+**PDF Report:** `pdf/DFT_Molecular_Benchmark_Report.pdf` (985 KB)
 
 **Contents:**
 - Complete methodology (DFT parameters)
-- Results with comparison tables and convergence plots
-- **Density of States (DOS) analysis**
-- OpenClaw workflow section (human-AI collaboration)
-- Discussion and conclusions
-
----
-
-## 📁 Project Structure
-
-```
-project_dft_tests/
-├── modules/              # Python calculation modules
-│   ├── molecular_calcs.py    # SCF + geometry optimization
-│   ├── h2_scan.py            # Bond scanning (optional)
-│   ├── electronic_props.py   # Charges, HOMO/LUMO (optional)
-│   ├── eda.py                # Exploratory data analysis
-│   └── report_gen.py         # PDF generation
-├── runs/                 # DFT calculation outputs
-│   ├── H2/                   # Hydrogen calculations
-│   ├── CO/                   # Carbon monoxide
-│   └── H2O/                  # Water
-├── results/              # Processed data
-│   ├── molecular_summary.csv     # Tabular results
-│   ├── metadata.json             # System/software info
-│   ├── summary_statistics.txt    # Statistical analysis
-│   └── h2_dos.csv                # Density of states data
-├── plots/                # Visualizations (300 DPI)
-│   ├── molecules_simple.png      # Molecular panel
-│   ├── bond_comparison.png       # DFT vs Experimental
-│   ├── convergence_analysis.png  # Optimization traces
-│   ├── energy_comparison.png     # Energy bar chart
-│   └── h2_dos.png                # Density of states
-├── pdf/                  # Final report
-│   ├── DFT_Molecular_Benchmark_Report.pdf  # Main PDF (11 pages)
-│   └── source.tex                           # LaTeX source
-├── run_all.py            # Main pipeline orchestrator
-└── README.md             # This file
-```
+- Optimized geometries with error analysis
+- **Molecular orbital analysis** (HOMO-LUMO diagrams)
+- **Binding energy calculations** (H₂ dissociation)
+- **Potential energy curves** (E(R) with equilibrium bond lengths)
+- Convergence analysis
+- OpenClaw workflow demonstration
+- Discussion of DFT-PBE limitations
 
 ---
 
@@ -94,7 +62,7 @@ pip install ase gpaw matplotlib numpy scipy pandas
 python3 run_all.py
 ```
 
-**Expected runtime:** ~30 minutes (H₂, CO, H₂O)
+**Expected runtime:** ~1 hour (includes geometry optimization and electronic analysis)
 
 ### 3. View Results
 
@@ -119,73 +87,61 @@ open pdf/DFT_Molecular_Benchmark_Report.pdf
 - Python 3.12.3
 - ASE 3.23.0
 - GPAW 24.6.0
-- NumPy 2.2.1
 
 ---
 
-## 📈 Visualizations
+## 📈 Key Results
 
-### Analysis Plots
+### Geometric Properties
 
-![Bond Comparison](plots/bond_comparison.png)
+All bond lengths within 2% of experimental values:
+- ✅ **H₂:** 1.35% error
+- ✅ **CO:** 0.80% error  
+- ✅ **H₂O:** 1.46% error
 
-Bond length comparison (DFT vs experimental) showing excellent agreement (<2% error).
+### Electronic Properties
 
-![Convergence Analysis](plots/convergence_analysis.png)
+**H₂ Analysis:**
+- **HOMO-LUMO gap:** 10.56 eV (exp ~11 eV, error ~4%)
+- **Binding energy:** 6.77 eV (exp 4.52 eV, PBE overestimation)
+- **R_eq from E(R) curve:** 0.755 Å (exp 0.741 Å, error 1.94%)
 
-BFGS optimization convergence traces for all three molecules.
+---
 
-![Density of States](plots/h2_dos.png)
+## 🔬 Molecular Electronic Analysis
 
-DOS analysis for H₂ showing HOMO/LUMO levels and electronic structure.
+### Why Not Density of States (DOS)?
+
+For small discrete molecules, **molecular orbital diagrams** are more appropriate than DOS:
+
+- ✅ Discrete energy levels (not continuous bands)
+- ✅ No artificial Gaussian smoothing
+- ✅ Direct HOMO/LUMO identification
+- ✅ Standard in molecular chemistry
+
+**Analysis performed:**
+1. Molecular orbital diagrams with HOMO/LUMO
+2. Binding energy: E_bind = 2×E(H atom) - E(H₂)
+3. Potential energy curves: E(R) with quadratic fit
+4. Direct eigenvalue analysis (no Fermi level ambiguity)
 
 ---
 
 ## 🤖 OpenClaw Workflow
 
-This project demonstrates the **OpenClaw experimental workflow** for scientific computing:
+Human-AI collaboration for scientific computing:
 
 | Aspect | Human (Rick) | AI (Faraday) |
 |--------|--------------|--------------|
 | Strategy | Define objectives | Implement pipeline |
-| Parameters | Choose XC functional, convergence | Configure calculators |
-| Execution | Monitor progress | Run DFT calculations |
-| Analysis | Physical interpretation | Generate plots |
-| Documentation | Review output | Compile LaTeX report |
+| Execution | Monitor progress | Run calculations |
+| Analysis | Interpret physics | Generate rigorous analysis |
 
-**Timeline:** ~1 hour from concept to publication-ready results
-
----
-
-## 🎓 Scientific Validation
-
-All bond lengths compared against experimental values from **NIST Chemistry WebBook**:
-
-- ✅ **H₂:** Error 1.35% (GGA typical overestimation)
-- ✅ **CO:** Error 0.80% (near-perfect agreement)
-- ✅ **H₂O:** Error 1.46% (bent geometry complexity)
-
-**Conclusion:** PBE functional accurately reproduces experimental geometries for simple molecular systems.
-
----
-
-## 🔬 Density of States Analysis
-
-DOS analysis provides insight into:
-- **Electronic structure:** HOMO/LUMO levels
-- **Chemical bonding:** σ and π orbitals
-- **Reactivity:** Occupied vs unoccupied states
-
-**H₂ Results:**
-- Fermi Level: -5.054 eV
-- HOMO: -5.057 eV (bonding σ)
-- LUMO: -5.051 eV (anti-bonding σ*)
+**Timeline:** ~1 hour from concept to results
 
 ---
 
 ## 📚 Citation
-
-If you use this pipeline, please cite:
 
 ```bibtex
 @software{dft_molecular_benchmark_2026,
@@ -195,11 +151,6 @@ If you use this pipeline, please cite:
   url={https://github.com/LuisRicardoMontoya/dft-molecular-benchmark}
 }
 ```
-
-**Software:**
-- ASE: https://wiki.fysik.dtu.dk/ase/
-- GPAW: https://wiki.fysik.dtu.dk/gpaw/
-- OpenClaw: https://docs.openclaw.ai/
 
 ---
 
